@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Setter
 @Entity
 @ToString
-@Table(name = "meetingroom")
+@Table(name = "meeting_room")
 public class Room {
 
     @Id
@@ -28,5 +28,4 @@ public class Room {
 
     @Column(name = "endHour", nullable = false)
     private String endHour;
-
 }
