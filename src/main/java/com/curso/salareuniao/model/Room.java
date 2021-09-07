@@ -20,8 +20,8 @@ public class Room {
     private String name;
     @Column(name = "date", nullable = false)
     private String date;
-    @Column(name = "starHour", nullable = false)
-    private String starHour;
+    @Column(name = "startHour", nullable = false)
+    private String startHour;
     @Column(name = "endHour", nullable = false)
     private String endHour;
 

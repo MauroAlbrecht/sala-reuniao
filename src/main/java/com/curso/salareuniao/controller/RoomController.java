@@ -48,7 +48,7 @@ public class RoomController {
         Room room = getRoom(roomId);
         room.setName(roomDetails.getName());
         room.setDate(roomDetails.getDate());
-        room.setStarHour(roomDetails.getStarHour());
+        room.setStartHour(roomDetails.getStartHour());
         room.setEndHour(roomDetails.getEndHour());
 
         final Room updateRoom = roomRepository.save(room);
