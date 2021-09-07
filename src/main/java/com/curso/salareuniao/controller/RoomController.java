@@ -25,16 +25,11 @@ public class RoomController {
         return roomRepository.findAll();
     }
 
-    @GetMapping("/rooms/id")
-    public ResponseEntity<Room> getRoomById(@PathVariable(value = "id") long roomID)
+    @GetMapping("/rooms/{id}")
+    public ResponseEntity<Room> getRoomById(@PathVariable(value = "id") Long roomID)
             throws ResourceNotFoundException {
         Room room = getRoom(roomID);
         return ResponseEntity.ok().body(room);
-    }
-
-    private Room getRoom(long roomID) throws ResourceNotFoundException {
-        return roomRepository.findById(roomID)
-                .orElseThrow(() -> new ResourceNotFoundException("Room not found ::" + roomID));
     }
 
     @PostMapping("/rooms")
@@ -44,8 +39,11 @@ public class RoomController {
 
     @PutMapping("/rooms/{id}")
     public ResponseEntity<Room> updateRoom(@PathVariable(value = "id") Long roomId,
-                                           @Valid @RequestBody Room roomDetails) throws ResourceNotFoundException {
+                                           @Valid @RequestBody Room roomDetails)
+            throws ResourceNotFoundException {
+
         Room room = getRoom(roomId);
+
         room.setName(roomDetails.getName());
         room.setDate(roomDetails.getDate());
         room.setStartHour(roomDetails.getStartHour());
@@ -66,5 +64,10 @@ public class RoomController {
         response.put("deleted", Boolean.TRUE);
 
         return response;
+    }
+
+    private Room getRoom(long roomID) throws ResourceNotFoundException {
+        return roomRepository.findById(roomID)
+                .orElseThrow(() -> new ResourceNotFoundException("Room not found ::" + roomID));
     }
 }
