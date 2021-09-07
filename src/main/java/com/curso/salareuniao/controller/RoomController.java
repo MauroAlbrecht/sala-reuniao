@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -52,5 +54,17 @@ public class RoomController {
         final Room updateRoom = roomRepository.save(room);
 
         return ResponseEntity.ok(updateRoom);
+    }
+
+    @DeleteMapping("/rooms/{id}")
+    public Map<String, Boolean> deleteRoom(@PathVariable(value = "id") Long roomId) throws ResourceNotFoundException {
+        Room room = getRoom(roomId);
+
+        roomRepository.delete(room);
+
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("deleted", Boolean.TRUE);
+
+        return response;
     }
 }
